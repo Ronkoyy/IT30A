@@ -47,13 +47,13 @@ INSERT INTO borrow (student_id, book_id) VALUES
         b.book_author,
         b.book_category,
 
-        br.borrow_date,
+        br.borrow_date
 
     FROM borrow br
     JOIN students s ON
         br.student_id = s.student_id
     JOIN books b ON
-        br.book_id = b.book_id;
+        br.book_id = b.book_id
 
     WHERE br.borrow_return_date IS NULL
     ORDER  BY br.borrow_date DESC;
