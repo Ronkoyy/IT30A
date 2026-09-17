@@ -38,7 +38,7 @@ if($section === 'students'){
     $stmt = $pdo->query("
         SELECT *
         FROM students
-        ORDER by student_id
+        ORDER by student_id DESC
         ");
 
         $students = $stmt->fetchAll();
