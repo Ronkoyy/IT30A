@@ -362,7 +362,8 @@ if($section === 'borrow'){
             borrow.borrow_return_date,
             students.student_first_name,
             students.student_last_name,
-            books.book_title
+            books.book_title,
+            books.book_author
         FROM borrow
         INNER JOIN students
             ON borrow.student_id = students.student_id
@@ -729,6 +730,7 @@ if($section === 'borrow'){
                 <th>Borrow ID</th>
                 <th>Student Name</th>
                 <th>Book Title</th>
+                <th>Book Author</th>
                 <th>Created At</th>
                 <th>Returned At</th>
             </tr>
@@ -751,14 +753,15 @@ if($section === 'borrow'){
                             . $borrow['student_last_name']
                         ) ?>
                     </td>
-
                     <td>
                         <?= htmlspecialchars($borrow['book_title']) ?>
+                    </td>
+                    <td>
+                        <?= htmlspecialchars($borrow['book_author']) ?>
                     </td>
                      <td>
                         <?= htmlspecialchars($borrow['borrow_date']) ?>
                     </td>
-
 
                     <td>
                         <?php if($borrow['borrow_return_date'] === null): ?>
