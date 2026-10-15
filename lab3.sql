@@ -88,5 +88,5 @@ INSERT INTO borrow (student_id, book_id) VALUES
 
 UPDATE borrow
 SET borrow_return_date = CURRENT_TIMESTAMP
-WHERE borrow_id = 8 AND borrow_return_date IS NULL
+WHERE borrow_id = 7 AND borrow_return_date IS NULL
 ORDER BY borrow_date DESC;
