@@ -60,7 +60,7 @@ while ($row = $catStmt->fetch()) {
             padding: 2rem 1.5rem;
             display: flex;
             flex-direction: column;
-            align-items: center;
+            align-items: vertical;
         }
         
         .dashboard { max-width: 1300px; width: 100%; }
@@ -284,7 +284,7 @@ while ($row = $catStmt->fetch()) {
 <body>
     <?php include 'includes/navbar.php'; ?>
 
-    <div class="stats-grid">
+<div class="stats-grid">
     <div class="stat-card">
         <div class="stat-header">
             <span class="stat-label">Students</span>
@@ -320,7 +320,7 @@ while ($row = $catStmt->fetch()) {
         <div class="stat-number"><?= $activeBorrows ?></div>
         <div class="stat-sub">not returned</div>
     </div>
-
+</div>
     <!-- CHARTS -->
 <div class="charts-grid">
 
@@ -337,6 +337,8 @@ while ($row = $catStmt->fetch()) {
     </div>
 
 </div>
+
+
 
 <script>
     (function() {
