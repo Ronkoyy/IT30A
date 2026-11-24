@@ -187,6 +187,144 @@ $recentBorrows = $recentStmt->fetchAll();
     </div>
     
 </div>
+<script>
+    (function() {
+        // Materialize standard palette
+        const colors = {
+            blue: '#1976d2',
+            green: '#4caf50',
+            orange: '#ff9800',
+            red: '#f44336',
+            purple: '#9c27b0',
+            grey: '#9e9e9e'
+        };
 
+        // ---------- DOUGHNUT : BOOKS BY CATEGORY ----------
+        const catCtx = document.getElementById('categoryChart').getContext('2d');
+        new Chart(catCtx, {
+            type: 'doughnut',
+            data: {
+                labels: <?= json_encode($categories) ?>,
+                datasets: [{
+                    data: <?= json_encode($categoryCounts) ?>,
+                    backgroundColor: [
+                        colors.blue, colors.green, colors.orange, colors.red, colors.purple, colors.grey
+                    ],
+                    borderWidth: 2,
+                    borderColor: '#ffffff',
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                cutout: '65%',
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            boxWidth: 12,
+                            boxHeight: 12,
+                            usePointStyle: false, // Materialize usually uses squares
+                            padding: 16,
+                            font: { size: 12, family: 'Roboto' },
+                            color: '#616161'
+                        }
+                    },
+                    tooltip: {
+                        backgroundColor: '#212121',
+                        titleColor: '#ffffff',
+                        bodyColor: '#ffffff',
+                        padding: 10,
+                        cornerRadius: 4,
+                        displayColors: true,
+                        callbacks: {
+                            label: function(context) {
+                                const label = context.label || '';
+                                const value = context.parsed || 0;
+                                const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                const pct = total > 0 ? ((value / total) * 100).toFixed(0) : 0;
+                                return ` ${label}: ${value} (${pct}%)`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        // ---------- BAR: BORROWS LAST 7 DAYS ----------
+
+    const borrowCtx = document
+        .getElementById('borrowChart')
+        .getContext('2d');
+
+    new Chart(borrowCtx, {
+        type: 'bar',
+
+        data: {
+            labels: <?= json_encode($dayLabels) ?>,
+
+            datasets: [{
+                label: 'Borrows',
+                data: <?= json_encode($dailyBorrows) ?>,
+                backgroundColor: colors.blue,
+                borderRadius: 0, // Material flat bars are sharp
+
+                barPercentage: 0.6,
+                categoryPercentage: 0.8
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    backgroundColor: '#212121',
+                    titleColor: '#ffffff',
+                    bodyColor: '#ffffff',
+                    padding: 10,
+                    cornerRadius: 4,
+
+                    callbacks: {
+                        label: (ctx) => ` ${ctx.raw} borrows`
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    grid: {
+                        color: '#eeeeee',
+                        drawBorder: false
+                    },
+                    ticks: {
+                        stepSize: 1,
+                        color: '#757575',
+                        font: {
+                            size: 11,
+                            family: 'Roboto'
+                        }
+                    }
+                },
+                x: {
+                    grid: {
+                        display: false
+                    },
+                    ticks: {
+                        color: '#757575',
+                        font: {
+                            size: 11,
+                            family: 'Roboto'
+                        }
+                    }
+                }
+            }
+        }
+    });      
+})();
+</script>
 </body>
 </html>
