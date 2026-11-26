@@ -146,7 +146,10 @@ $recentBorrows = $recentStmt->fetchAll();
 
             <canvas id="borrowChart" width="400" height="200"></canvas>
         </div>
-        <!-- RECENT BORROWS -->
+       
+
+    </div>
+     <!-- RECENT BORROWS -->
         <div class="recent-borrows">
             <div class="recent-header">
                 <h3>
@@ -183,8 +186,6 @@ $recentBorrows = $recentStmt->fetchAll();
                 <?php endforeach; ?>
             <?php endif; ?>
         </div>
-
-    </div>
     
 </div>
 <script>
